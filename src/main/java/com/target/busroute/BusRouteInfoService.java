@@ -22,8 +22,7 @@ public class BusRouteInfoService {
 	
 	public static URL url = null;
 	
-    public static String stopID = "";
-    
+       
     public static String timeStamp = "";
     
     public static String stop;
@@ -93,8 +92,8 @@ public class BusRouteInfoService {
                 {
                     if(compareString.equals(stop))
                     {
-                        stopID = obj.getAsJsonObject().get(argTwo).getAsString();
-                        return stopID;
+                        return obj.getAsJsonObject().get(argTwo).getAsString();
+                        
                     }
                     return obj.getAsJsonObject().get(argTwo).getAsString();
                 }
