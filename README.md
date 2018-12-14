@@ -6,7 +6,9 @@ Bus route application
 First use below command to download dependencies and compile the program
       
       $mvn clean install
-      
+      eg:
+![capture1](https://user-images.githubusercontent.com/25560217/49987206-8833ad00-ff98-11e8-818e-3bc2f40d4f4b.png)  
+
       $javac BusRouteApplication.java
       
 Then use below command to run the program
