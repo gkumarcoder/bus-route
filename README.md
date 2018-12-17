@@ -1,7 +1,7 @@
-#Bus route application
+# Bus route application
 
 
-1-Build Process(How to run this application)
+## Build Process(How to run this application)
 
 First use below command to download dependencies and compile the program
       
@@ -16,7 +16,7 @@ Then use below command to run the program
        eg:
 ![image](https://user-images.githubusercontent.com/25560217/49987996-52dc8e80-ff9b-11e8-8640-b9cdf1d52092.png)
 
-2-External libraries:
+## External libraries:
 
 The libraries and imports used are as follows: 
 
@@ -28,7 +28,7 @@ The libraries and imports used are as follows:
 
          import com.google.gson.*;
 
-3- Test case result
+## Test case result
 
 ![image](https://user-images.githubusercontent.com/25560217/50099349-e7691a00-0243-11e9-9f35-ae41a51dbe81.png)
 
