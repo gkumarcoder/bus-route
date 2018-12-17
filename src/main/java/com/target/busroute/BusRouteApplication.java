@@ -18,8 +18,8 @@ public class BusRouteApplication {
 	public static int directionID;
 	public static String dir;
 	public static String urlString;
-	public static String stopID = "";
-	public static String timeStamp = "";
+	public static String stopID = StringUtils.EMPTY;
+	public static String timeStamp = StringUtils.EMPTY;
 
 	/**
 	 * The main function of the program will take three command-line argument at the
@@ -38,66 +38,59 @@ public class BusRouteApplication {
 		String route = Optional.ofNullable(args[0]).orElse(StringUtils.EMPTY);
 		
 		if (route == null || route.trim().length() == 0) {
-			System.out.println(ApplicationConstant.ERR_IN_ROUTE);
-			System.exit(-1);
+			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_ROUTE);
 		}
 		
 		String stop = Optional.ofNullable(args[1]).orElse(StringUtils.EMPTY);
 
 		if (stop == null || stop.trim().length() == 0) {
-			System.out.println(ApplicationConstant.ERR_IN_STOP);
-			System.exit(-1);
+			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_STOP);
 		}
 		
 		String direction = Optional.ofNullable(args[2]).orElse(StringUtils.EMPTY);
 		
 		if (direction == null || direction.trim().length() == 0) {
-			System.out.println(ApplicationConstant.ERR_IN_DIRECTION);
-			System.exit(-1);
+			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_DIRECTION);
 		}
+		
 		// Convert direction id
-		dir = BusRouteInfoService.getDirection(direction);
+		dir = BusRouteInfoService.validateDirection(direction);
 		if (Direction.ERROR.getDirection().equals(dir)) {
-			System.out.println(dir);
-			System.exit(-1);
+			throw new BusApplicationGenericException(dir);
 		}
 
 		// Verifies the route ID for the specific route that was entered and return the ID
-		routeID = BusRouteInfoService.getBusRouteId(ApplicationConstant.ENDPOINT + "NexTrip/Routes?format=json",
+		routeID = BusRouteInfoService.getBusRouteId(ApplicationConstant.ENDPOINT + "Routes?format=json",
 				"Description", "Route", route);
 		if (routeID == -1) {
-			System.out.println(route + ApplicationConstant.ERR_NOTE_FOUND);
-			System.exit(-1);
+			throw new BusApplicationGenericException(route + ApplicationConstant.ERR_NOTE_FOUND);
 		}
 
-		//Verifies the directionID for the specific direction and if found matched direction return the valid ID
+		// Verifies the directionID for the specific direction and if found matched direction return the valid ID
 		directionID = BusRouteInfoService.getBusRouteDirection(
-				ApplicationConstant.ENDPOINT + "NexTrip/Directions/" + routeID + "?format=json", "Text", "Value", dir);
+				ApplicationConstant.ENDPOINT + "Directions/" + routeID + "?format=json", "Text", "Value", dir);
 		if (directionID == -1) {
-			System.out.println(direction + ApplicationConstant.ERR_IN_DIR);
-			System.exit(-1);
+			 throw new BusApplicationGenericException(direction + ApplicationConstant.ERR_IN_DIR);
 		}
 
-		//Verifies the stop ID String and if found matched stop return the stop ID
+		// Verifies the stop ID String and if found matched stop return the stop ID
 		stopID = BusRouteInfoService.getBusRouteStop(
-				ApplicationConstant.ENDPOINT + "NexTrip/Stops/" + routeID + "/" + directionID + "?format=json", "Text",
+				ApplicationConstant.ENDPOINT + "Stops/" + routeID + ApplicationConstant.SLASH + directionID + "?format=json", "Text",
 				"Value", stop);
-		if (stopID.equals("")) {
-			System.out.println(stop + ApplicationConstant.ERR_NOTE_FOUND);
-			System.exit(-1);
+		if (stopID.equals(StringUtils.EMPTY)) {
+			 throw new BusApplicationGenericException(stop + ApplicationConstant.ERR_NOTE_FOUND);
 		}
 
-		//Verifies the timeStamp String and if found matched timeStamp return the departureTime.
-		
+		// Verifies the timeStamp String and if found matched timeStamp return the departureTime.
 		timeStamp = BusRouteInfoService.getBusRouteTimeStamp(
-				ApplicationConstant.ENDPOINT + "NexTrip/" + routeID + "/" + directionID + "/" + stopID + "?format=json",
+				ApplicationConstant.ENDPOINT + routeID + ApplicationConstant.SLASH + directionID + ApplicationConstant.SLASH + stopID + "?format=json",
 				"RouteDirection", "DepartureTime", timeStamp);
-		if (timeStamp.equals("")) {
-		//The specification says that if the last bus of the day has already left to not return anything. So I exit clean here.
+		if (timeStamp.equals(StringUtils.EMPTY)) {
+			// The specification says that if the last bus of the day has already left to not return anything. So I exit clean here.
 			System.exit(0);
 		}
 
-		//Compute the time and print the result
+		// compute the time and print the result
 		BusRouteInfoService.computeTime(timeStamp);
 	}
 
