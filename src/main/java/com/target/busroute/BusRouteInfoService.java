@@ -9,6 +9,10 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -20,10 +24,11 @@ import com.google.gson.JsonParser;
  */
 public class BusRouteInfoService {
 	
+	private final static Logger logger = LoggerFactory.getLogger(BusRouteInfoService.class);
+	
 	public static URL url = null;
 	
-       
-    public static String timeStamp = "";
+    public static String timeStamp = StringUtils.EMPTY;
     
     public static String stop;
     
@@ -59,7 +64,7 @@ public class BusRouteInfoService {
      * @param dir
      * @return
      */
-	public  static String getDirection(String dir) {
+	public  static String validateDirection(String dir) {
 		if(dir.equalsIgnoreCase(Direction.EAST.name()))
 			return Direction.EAST.getDirection();
 		else if(dir.equalsIgnoreCase(Direction.WEST.name()))
@@ -92,7 +97,7 @@ public class BusRouteInfoService {
                 {
                     if(compareString.equals(stop))
                     {
-                        return obj.getAsJsonObject().get(argTwo).getAsString();
+                    	return obj.getAsJsonObject().get(argTwo).getAsString();
                         
                     }
                     return obj.getAsJsonObject().get(argTwo).getAsString();
@@ -101,8 +106,7 @@ public class BusRouteInfoService {
         }
         catch(IOException e)
         {
-            System.out.println("Caused an IOException");
-            e.printStackTrace();
+        	logger.error("Caused an IOException {}" , e.getMessage());
         }
         return "-1";
     }
@@ -128,8 +132,7 @@ public class BusRouteInfoService {
         }
         catch(IOException e)
         {
-            System.out.println("Caused an IOException");
-            e.printStackTrace();
+        	logger.error("Caused an IOException {}" , e.getMessage());
         }
         return "-1";
     }
@@ -151,10 +154,9 @@ public class BusRouteInfoService {
         }
         catch(IOException e)
         {
-            System.out.println("Caused an IOException");
-            e.printStackTrace();
+        	logger.error("Caused an IOException {}" , e.getMessage());
         }
-        return -1;
+       return -1;
     }
     /**
      * Verifies the direction and if found matched direction return the valid ID
@@ -182,37 +184,34 @@ public class BusRouteInfoService {
         }
         catch(IOException e)
         {
-            System.out.println("Caused an IOException");
-            e.printStackTrace();
+        	logger.error("Caused an IOException {}" , e.getMessage());
         }
         return -1;
     }
     /**
      * Computes the time based on the UTC value given through the GetTimepointDepartures function
      */
-    public static void computeTime(String timeStamp )
-    {
-       
-        timeStamp = timeStamp.substring(6,19);
-        
-        Long longTime = Long.valueOf(timeStamp).longValue();
-        Date currentDate = new Date();
+	public static void computeTime(String timeStamp) {
+		try {
+			timeStamp = timeStamp.substring(6, 19);
 
-        //compute the difference between the current time and the departure time (longTime). Divide by 60000 to account for milliseconds and minutes
-        long timeTillBus = (longTime-currentDate.getTime())/60000;
-        if(timeTillBus > 1)
-        {
-            System.out.println(timeTillBus + " minutes");
-        }
-        else if (timeTillBus == 0)
-        {
-            //no printout for the time
-        }
-        else
-        {
-            System.out.println(timeTillBus + " minute");
-        }
-    }
+			Long longTime = Long.valueOf(timeStamp).longValue();
+			Date currentDate = new Date();
+
+			// compute the difference between the current time and the departure time
+			// (longTime). Divide by 60000 to account for milliseconds and minutes
+			long timeTillBus = (longTime - currentDate.getTime()) / 60000;
+			if (timeTillBus > 1) {
+				System.out.println(timeTillBus + " minutes");
+			} else if (timeTillBus == 0) {
+				// no printout for the time
+			} else {
+				System.out.println(timeTillBus + " minute");
+			}
+		} catch (Exception e) {
+			logger.error("timeStamp is not properly mapped {}" , e.getMessage());
+		}
+	}
 
 
 }
