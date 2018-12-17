@@ -27,5 +27,10 @@ The libraries and imports used are as follows:
          import java.net.URL;
 
          import com.google.gson.*;
+
+3- Test case result
+
+![image](https://user-images.githubusercontent.com/25560217/50099148-6b6ed200-0243-11e9-8ee6-d5f251250ea5.png)
+
          
         
