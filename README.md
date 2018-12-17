@@ -6,7 +6,7 @@
 First use below command to download dependencies and compile the program
       
       $mvn clean install
-      eg:
+      eg:java -jar bus-route-0.0.1-SNAPSHOT.jar 5 77PO north
 ![capture1](https://user-images.githubusercontent.com/25560217/49988433-ab605b80-ff9c-11e8-8b4f-989d5bfaa9f4.JPG) 
       
 Then use below command to run the program
