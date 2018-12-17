@@ -24,9 +24,9 @@ import com.google.gson.JsonParser;
  */
 public class BusRouteInfoService {
 	
-	private final static Logger logger = LoggerFactory.getLogger(BusRouteInfoService.class);
+    private final static Logger logger = LoggerFactory.getLogger(BusRouteInfoService.class);
 	
-	public static URL url = null;
+    public static URL url = null;
 	
     public static String timeStamp = StringUtils.EMPTY;
     
@@ -188,6 +188,7 @@ public class BusRouteInfoService {
         }
         return -1;
     }
+	
     /**
      * Computes the time based on the UTC value given through the GetTimepointDepartures function
      */
@@ -212,6 +213,5 @@ public class BusRouteInfoService {
 			logger.error("timeStamp is not properly mapped {}" , e.getMessage());
 		}
 	}
-
 
 }
