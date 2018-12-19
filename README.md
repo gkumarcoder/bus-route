@@ -6,8 +6,11 @@
 First use below command to download dependencies and compile the program
       
       $mvn clean install
+      
 or else you can directly download the jar file and you can skip this step  
+
       eg:
+      
 ![image](https://user-images.githubusercontent.com/25560217/50240243-449ed000-03ea-11e9-8d5b-46f75e00f758.png)
       
 Then use below command to run the program
