@@ -18,7 +18,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 /**
- * Validate the route stop and direction
+ * This class will validate the route stop and direction
  * 
  * @author gkumar3
  *
@@ -75,7 +75,7 @@ public class BusRouteInfoService {
 	}
 	
 	/**
-	 * Verifies stop ID String and if found matched stop return the stop ID otherwise return ApplicationConstant.DEFAULT_VALUE
+	 * 
 	 * @param Url ENDPOINT service url
 	 * @param ElementOne  json element "Text" 
 	 * @param ElementTwo   json element "Value" 
@@ -110,7 +110,7 @@ public class BusRouteInfoService {
 	 * @param ElementOne  
 	 * @param ElementTwo    
 	 * @param compareString
-	 * @return Time  if it will found matched else it will return ApplicationConstant.DEFAULT_VALUE
+	 * @return Time  if it will found matched else it will return return empty string
 	 */
     public static String  getBusRouteTimeStamp(String Url, String argOne, String argTwo, String compareString)
     {
