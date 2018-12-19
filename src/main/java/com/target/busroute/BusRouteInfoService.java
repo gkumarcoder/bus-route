@@ -18,7 +18,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 /**
- * 
+ * BusRouteInfoService service 
+ 
  * @author gkumar3
  *
  */
@@ -77,12 +78,12 @@ public class BusRouteInfoService {
 	}
 	
 	/**
-	 * 
-	 * @param Url
-	 * @param ElementOne
-	 * @param ElementTwo
+	 * Verifies stop ID String and if found matched stop return the stop ID otherwise return -1
+	 * @param Url ENDPOINT service url
+	 * @param ElementOne  json element "Text" 
+	 * @param ElementTwo   json element "Value" 
 	 * @param compareString
-	 * @return
+	 * @return stop ID if it will found matched else it will return -1
 	 */
     public static String getBusRouteStop(String Url, String argOne, String argTwo, String compareString)
     {
