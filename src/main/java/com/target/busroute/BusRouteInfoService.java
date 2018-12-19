@@ -29,8 +29,6 @@ public class BusRouteInfoService {
 	
 	public static URL url = null;
 	
-    public static String timeStamp = StringUtils.EMPTY;
-    
     public static String stop;
     
     public static HttpURLConnection request;
@@ -77,17 +75,17 @@ public class BusRouteInfoService {
 	}
 	
 	/**
-	 * Verifies stop ID String and if found matched stop return the stop ID otherwise return -1
+	 * Verifies stop ID String and if found matched stop return the stop ID otherwise return ApplicationConstant.DEFAULT_VALUE
 	 * @param Url ENDPOINT service url
 	 * @param ElementOne  json element "Text" 
 	 * @param ElementTwo   json element "Value" 
 	 * @param compareString
-	 * @return stop ID if it will found matched else it will return -1
+	 * @return stop ID if it will found matched else it will return empty string
 	 */
     public static String getBusRouteStop(String Url, String argOne, String argTwo, String compareString)
     {
     	try {
-    	JsonElement jsonElement=getHttpConnection(Url);
+    	    JsonElement jsonElement=getHttpConnection(Url);
      
             JsonArray jsonArrayObj = jsonElement.getAsJsonArray();
 
@@ -95,11 +93,6 @@ public class BusRouteInfoService {
             {
                 if(obj.getAsJsonObject().get(argTwo).getAsString().contains(compareString))
                 {
-                    if(compareString.equals(stop))
-                    {
-                    	return obj.getAsJsonObject().get(argTwo).getAsString();
-                        
-                    }
                     return obj.getAsJsonObject().get(argTwo).getAsString();
                 }
             }
@@ -108,15 +101,16 @@ public class BusRouteInfoService {
         {
         	logger.error("Caused an IOException {}" , e.getMessage());
         }
-        return "-1";
+        return StringUtils.EMPTY;
     }
 
     /**
+     * 
 	 * @param Url 
 	 * @param ElementOne  
 	 * @param ElementTwo    
 	 * @param compareString
-	 * @return Time  if it will found matched else it will return -1
+	 * @return Time  if it will found matched else it will return ApplicationConstant.DEFAULT_VALUE
 	 */
     public static String  getBusRouteTimeStamp(String Url, String argOne, String argTwo, String compareString)
     {
@@ -129,11 +123,7 @@ public class BusRouteInfoService {
             {
                 if(obj.getAsJsonObject().get(argOne).getAsString().contains(compareString))
                 {
-                	if(compareString.equals(timeStamp))
-		    		{
                 		return obj.getAsJsonObject().get(argTwo).getAsString();
-		    		}
-		    		return obj.getAsJsonObject().get(argTwo).getAsString();
                 }
             }
         }
@@ -141,7 +131,7 @@ public class BusRouteInfoService {
         {
         	logger.error("Caused an IOException {}" , e.getMessage());
         }
-        return "-1";
+        return StringUtils.EMPTY;
     }
     /**
      * @param Url
@@ -169,7 +159,7 @@ public class BusRouteInfoService {
         {
         	logger.error("Caused an IOException {}" , e.getMessage());
         }
-       return "-1";
+       return ApplicationConstant.DEFAULT_VALUE;
     }
     /**
      * Verifies the direction and if found matched direction return the valid ID
@@ -199,7 +189,7 @@ public class BusRouteInfoService {
         {
         	logger.error("Caused an IOException {}" , e.getMessage());
         }
-        return "-1";
+        return ApplicationConstant.DEFAULT_VALUE;
     }
     /**
      * Computes the time based on the UTC value given through the GetTimepointDepartures function
