@@ -30,7 +30,10 @@ The libraries and imports used are as follows:
 
 ## Test case result
 
+  ### positive case
 ![image](https://user-images.githubusercontent.com/25560217/50099349-e7691a00-0243-11e9-9f35-ae41a51dbe81.png)
 
-         
+  ### Negative case
+
+![image](https://user-images.githubusercontent.com/25560217/50239394-0f917e00-03e8-11e9-9495-84aaa25379c9.png)
         
