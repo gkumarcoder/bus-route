@@ -18,16 +18,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 /**
- * BusRouteInfoService service 
- 
+ * Validate the route stop and direction
+ * 
  * @author gkumar3
  *
  */
 public class BusRouteInfoService {
 	
-    private final static Logger logger = LoggerFactory.getLogger(BusRouteInfoService.class);
+	private final static Logger logger = LoggerFactory.getLogger(BusRouteInfoService.class);
 	
-    public static URL url = null;
+	public static URL url = null;
 	
     public static String timeStamp = StringUtils.EMPTY;
     
@@ -36,7 +36,7 @@ public class BusRouteInfoService {
     public static HttpURLConnection request;
     
     /**
-     * This method will receive a Json Array and extract the element from it
+     * This method will receive a json Array and extract the element from it
      * 
      * @param Url
      * @return
@@ -61,7 +61,6 @@ public class BusRouteInfoService {
     
     /**
      * Set the direction to the expected output to correctly match the JSON element
-     *     
      * @param dir
      * @return
      */
@@ -78,7 +77,7 @@ public class BusRouteInfoService {
 	}
 	
 	/**
-	 * 
+	 * Verifies stop ID String and if found matched stop return the stop ID otherwise return -1
 	 * @param Url ENDPOINT service url
 	 * @param ElementOne  json element "Text" 
 	 * @param ElementTwo   json element "Value" 
@@ -112,6 +111,13 @@ public class BusRouteInfoService {
         return "-1";
     }
 
+    /**
+	 * @param Url 
+	 * @param ElementOne  
+	 * @param ElementTwo    
+	 * @param compareString
+	 * @return Time  if it will found matched else it will return -1
+	 */
     public static String  getBusRouteTimeStamp(String Url, String argOne, String argTwo, String compareString)
     {
     	try {
@@ -137,8 +143,14 @@ public class BusRouteInfoService {
         }
         return "-1";
     }
-    
-    public static int getBusRouteId(String Url, String argOne, String argTwo, String compareString)
+    /**
+     * @param Url
+     * @param argOne
+     * @param argTwo
+     * @param compareString
+     * @return
+     */
+    public static String getBusRouteId(String Url, String argOne, String argTwo, String compareString)
     {
     	try {
     	JsonElement jsonElement=getHttpConnection(Url);
@@ -149,7 +161,7 @@ public class BusRouteInfoService {
             {
                 if(obj.getAsJsonObject().get(argOne).getAsString().contains(compareString))
                 {
-                    return obj.getAsJsonObject().get(argTwo).getAsInt();
+                    return obj.getAsJsonObject().get(argTwo).getAsString();
                 }
             }
         }
@@ -157,7 +169,7 @@ public class BusRouteInfoService {
         {
         	logger.error("Caused an IOException {}" , e.getMessage());
         }
-       return -1;
+       return "-1";
     }
     /**
      * Verifies the direction and if found matched direction return the valid ID
@@ -168,7 +180,7 @@ public class BusRouteInfoService {
      * @param compareString
      * @return
      */
-    public static int getBusRouteDirection(String Url, String argOne, String argTwo, String compareString)
+    public static String getBusRouteDirection(String Url, String argOne, String argTwo, String compareString)
     {
     	try {
     	JsonElement jsonElement=getHttpConnection(Url);
@@ -179,7 +191,7 @@ public class BusRouteInfoService {
             {
                 if(obj.getAsJsonObject().get(argTwo).getAsString().contains(compareString))
                 {
-                    return obj.getAsJsonObject().get(argTwo).getAsInt();
+                    return obj.getAsJsonObject().get(argTwo).getAsString();
                 }
             }
         }
@@ -187,9 +199,8 @@ public class BusRouteInfoService {
         {
         	logger.error("Caused an IOException {}" , e.getMessage());
         }
-        return -1;
+        return "-1";
     }
-	
     /**
      * Computes the time based on the UTC value given through the GetTimepointDepartures function
      */
