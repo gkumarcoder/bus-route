@@ -35,6 +35,8 @@ public class BusRouteApplication {
 			System.exit(-1);
 		}
 
+		// check for null value 
+		
 		String route = Optional.ofNullable(args[0]).orElse(StringUtils.EMPTY);
 		
 		if (route == null || route.trim().length() == 0) {
