@@ -37,19 +37,19 @@ public class BusRouteApplication {
 
 		// check for null value 
 		
-		String route = Optional.ofNullable(args[0]).orElse(StringUtils.EMPTY);
+		String route = Optional.ofNullable(args[0]).orElseGet(()->StringUtils.EMPTY);
 		
 		if (route == null || route.trim().length() == 0) {
 			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_ROUTE);
 		}
 		
-		String stop = Optional.ofNullable(args[1]).orElse(StringUtils.EMPTY);
+		String stop = Optional.ofNullable(args[1]).orElseGet(()->StringUtils.EMPTY);
 
 		if (stop == null || stop.trim().length() == 0) {
 			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_STOP);
 		}
 		
-		String direction = Optional.ofNullable(args[2]).orElse(StringUtils.EMPTY);
+		String direction = Optional.ofNullable(args[2]).orElseGet(()->StringUtils.EMPTY);
 		
 		if (direction == null || direction.trim().length() == 0) {
 			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_DIRECTION);
