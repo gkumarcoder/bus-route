@@ -14,8 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 public class BusRouteApplication {
 
 	public static int time;
-	public static int routeID;
-	public static int directionID;
+	public static String routeID;
+	public static String directionID;
 	public static String dir;
 	public static String urlString;
 	public static String stopID = StringUtils.EMPTY;
@@ -35,8 +35,6 @@ public class BusRouteApplication {
 			System.exit(-1);
 		}
 
-		// check for null value 
-		
 		String route = Optional.ofNullable(args[0]).orElseGet(()->StringUtils.EMPTY);
 		
 		if (route == null || route.trim().length() == 0) {
@@ -49,7 +47,7 @@ public class BusRouteApplication {
 			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_STOP);
 		}
 		
-		String direction = Optional.ofNullable(args[2]).orElseGet(()->StringUtils.EMPTY);
+		String direction = Optional.ofNullable(args[2]).orElse(StringUtils.EMPTY);
 		
 		if (direction == null || direction.trim().length() == 0) {
 			throw new BusApplicationGenericException(ApplicationConstant.ERR_IN_DIRECTION);
@@ -62,31 +60,31 @@ public class BusRouteApplication {
 		}
 
 		// Verifies the route ID for the specific route that was entered and return the ID
-		routeID = BusRouteInfoService.getBusRouteId(ApplicationConstant.ENDPOINT + "Routes?format=json",
-				"Description", "Route", route);
-		if (routeID == -1) {
+		routeID = Optional.ofNullable(BusRouteInfoService.getBusRouteId(ApplicationConstant.ENDPOINT + "Routes?format=json",
+				"Description", "Route", route)).orElseGet(()->StringUtils.EMPTY);
+		if (routeID.equalsIgnoreCase("-1")) {
 			throw new BusApplicationGenericException(route + ApplicationConstant.ERR_NOTE_FOUND);
 		}
 
 		// Verifies the directionID for the specific direction and if found matched direction return the valid ID
-		directionID = BusRouteInfoService.getBusRouteDirection(
-				ApplicationConstant.ENDPOINT + "Directions/" + routeID + "?format=json", "Text", "Value", dir);
-		if (directionID == -1) {
+		directionID =  Optional.ofNullable(BusRouteInfoService.getBusRouteDirection(
+				ApplicationConstant.ENDPOINT + "Directions/" + routeID + "?format=json", "Text", "Value", dir)).orElseGet(()->StringUtils.EMPTY);;
+		if (directionID.equalsIgnoreCase("-1")) {
 			 throw new BusApplicationGenericException(direction + ApplicationConstant.ERR_IN_DIR);
 		}
 
 		// Verifies the stop ID String and if found matched stop return the stop ID
-		stopID = BusRouteInfoService.getBusRouteStop(
+		stopID =  Optional.ofNullable(BusRouteInfoService.getBusRouteStop(
 				ApplicationConstant.ENDPOINT + "Stops/" + routeID + ApplicationConstant.SLASH + directionID + "?format=json", "Text",
-				"Value", stop);
+				"Value", stop)).orElseGet(()->StringUtils.EMPTY);;
 		if (stopID.equals(StringUtils.EMPTY)) {
 			 throw new BusApplicationGenericException(stop + ApplicationConstant.ERR_NOTE_FOUND);
 		}
 
 		// Verifies the timeStamp String and if found matched timeStamp return the departureTime.
-		timeStamp = BusRouteInfoService.getBusRouteTimeStamp(
+		timeStamp =  Optional.ofNullable(BusRouteInfoService.getBusRouteTimeStamp(
 				ApplicationConstant.ENDPOINT + routeID + ApplicationConstant.SLASH + directionID + ApplicationConstant.SLASH + stopID + "?format=json",
-				"RouteDirection", "DepartureTime", timeStamp);
+				"RouteDirection", "DepartureTime", timeStamp)).orElseGet(()->StringUtils.EMPTY);
 		if (timeStamp.equals(StringUtils.EMPTY)) {
 			// The specification says that if the last bus of the day has already left to not return anything. So I exit clean here.
 			System.exit(0);
