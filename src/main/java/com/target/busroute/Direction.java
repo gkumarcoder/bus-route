@@ -1,8 +1,6 @@
 package com.target.busroute;
 /**
- * /**
-     * Enumeration of all possible direction types.
-     */
+ * Enumeration of all possible direction types.
  * @author gkumar3
  * 
  */
