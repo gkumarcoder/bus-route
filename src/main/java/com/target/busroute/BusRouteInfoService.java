@@ -78,7 +78,7 @@ public class BusRouteInfoService {
 	}
 	
 	/**
-	 * Verifies stop ID String and if found matched stop return the stop ID otherwise return -1
+	 * 
 	 * @param Url ENDPOINT service url
 	 * @param ElementOne  json element "Text" 
 	 * @param ElementTwo   json element "Value" 
