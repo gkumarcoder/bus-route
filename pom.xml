@@ -16,11 +16,9 @@
 	<description>This program returns the time in minutes for a bus on &quot;BUS ROUTE&quot; leaving from &quot;BUS STOP
         NAME&quot; going &quot;DIRECTION&quot; using the API at http://svc.metrotransit.org/
     </description>
-
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
