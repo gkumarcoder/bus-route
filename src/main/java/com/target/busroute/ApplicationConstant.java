@@ -16,9 +16,9 @@ public class ApplicationConstant {
 	public static final String ERR_IN_ROUTE = "Please enter correct route name";
 	public static final String ERR_IN_STOP = "Please enter correct stop name";
 	public static final String ERR_IN_DIRECTION = "Please enter correct direction name";
-	public static final String SLASH = "/";
+	public static final String SLASH ="/";
 	
-	public static final String DEFAULT_VALUE = "-1";
+	public static final String DEFAULT_VALUE ="-1";
 	
 
 }
