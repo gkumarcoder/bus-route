@@ -1,6 +1,5 @@
 # Bus route application
 
-
 ## Build Process(How to run this application)
 
 First use below command to download dependencies and compile the program
