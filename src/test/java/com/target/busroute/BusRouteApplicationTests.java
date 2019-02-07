@@ -20,10 +20,8 @@ public class BusRouteApplicationTests {
 	@Test
 	//@Ignore
 	public void testCase1() throws IOException {
-		
 		String arg[] = { "5", "77PO", "north" };
 		BusRouteApplication.main(arg);
-
 	}
 	/**
 	 * In this case it will ask user to enter the direction name eg "Please enter correct direction name"
