@@ -20,6 +20,7 @@ public class BusRouteApplicationTests {
 	@Test
 	//@Ignore
 	public void testCase1() throws IOException {
+		
 		String arg[] = { "5", "77PO", "north" };
 		BusRouteApplication.main(arg);
 
