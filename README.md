@@ -1,5 +1,6 @@
 # Bus route application
 
+
 ## Build Process(How to run this application)
 
 First use below command to download dependencies and compile the program
@@ -41,5 +42,9 @@ The libraries and imports used are as follows:
 
 ![image](https://user-images.githubusercontent.com/25560217/50239394-0f917e00-03e8-11e9-9495-84aaa25379c9.png)
 
+
+This program returns the time in minutes for a bus on "BUS ROUTE" leaving from "BUS STOP NAME" going "DIRECTION" using the API at http://svc.metrotransit.org/ 
+
+value
 
         
