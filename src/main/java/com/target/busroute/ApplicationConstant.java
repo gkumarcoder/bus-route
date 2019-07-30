@@ -1,6 +1,6 @@
 package com.target.busroute;
 /**
- * 
+ * All Application constant is deffined here 
  * @author gkumar3
  *
  */
