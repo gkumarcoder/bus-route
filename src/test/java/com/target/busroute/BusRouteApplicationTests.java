@@ -14,7 +14,7 @@ public class BusRouteApplicationTests {
 	@Test
 	
 	public void testCase6() throws IOException {
-		String arg[] = { "5", "77PO", "north" };
+		String arg[] = { "5", "77P7", "north" };
 		String arg[] = { "5", "77PO", "north" };
 		BusRouteApplication.main(arg);
 	}
