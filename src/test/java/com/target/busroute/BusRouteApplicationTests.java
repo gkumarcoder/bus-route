@@ -13,7 +13,7 @@ import org.junit.Test;
 public class BusRouteApplicationTests {
 	@Test
 	
-	public void testCase5() throws IOException {
+	public void testCase6() throws IOException {
 		String arg[] = { "5", "77PO", "north" };
 		String arg[] = { "5", "77PO", "north" };
 		BusRouteApplication.main(arg);
