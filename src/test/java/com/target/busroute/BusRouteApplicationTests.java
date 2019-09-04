@@ -11,6 +11,13 @@ import org.junit.Test;
  * @author gkumar3
  */
 public class BusRouteApplicationTests {
+	@Test
+	
+	public void testCase5() throws IOException {
+		String arg[] = { "5", "77PO", "north" };
+		BusRouteApplication.main(arg);
+	}
+	
 	
 	/**
 	 * In this case we are passing the correct route,stop and direction so,this test case will print the ETA (Estimated Arrival Time)
