@@ -1,6 +1,7 @@
 package com.target.busroute;
 /**
 Application Exception class
+
 **/
 public class BusApplicationGenericException extends RuntimeException  {
 	 
