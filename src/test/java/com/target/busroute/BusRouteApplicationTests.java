@@ -12,6 +12,8 @@ import org.junit.Test;
  */
 public class BusRouteApplicationTests {
 	
+	//test
+System.out.printlin("java");
 	/**
 	 * In this case we are passing the correct route,stop and direction so,this test case will print the ETA (Estimated Arrival Time)
 	 * 
